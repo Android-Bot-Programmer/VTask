@@ -17,14 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.delay
 import ru.vaa.vtask.R
+import ru.vaa.vtask.data.home.HomeViewModel
 import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.navigation.PostVTaskRouter
 import ru.vaa.vtask.ui.theme.Primary
 
 @Composable
-fun AnimatedSplashScreen() {
+fun AnimatedSplashScreen(homeViewModel: HomeViewModel = viewModel()) {
+    homeViewModel.checkForActiveSession()
     val scale = remember {
         Animatable(0f)
     }
@@ -40,8 +43,12 @@ fun AnimatedSplashScreen() {
                 })
         )
         delay(3000L)
-        PostVTaskRouter.navigateTo(Screen.BoardScreen)
-        //navController.navigate(Screen1.StartBoard.route)
+
+        if (homeViewModel.isUserLoggedIn.value == true) {
+            PostVTaskRouter.navigateTo(Screen.HomeScreen)
+        } else {
+            PostVTaskRouter.navigateTo(Screen.BoardScreen)
+        }
     }
     Splash(scale)
 }

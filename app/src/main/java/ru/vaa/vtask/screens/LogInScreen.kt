@@ -3,8 +3,10 @@ package ru.vaa.vtask.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -18,13 +20,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.vaa.vtask.R
-import ru.vaa.vtask.components.ClickableTextComponent
 import ru.vaa.vtask.components.CustomFAB
 import ru.vaa.vtask.components.CustomHeadingTextComponent
 import ru.vaa.vtask.components.CustomPasswordTextField
 import ru.vaa.vtask.components.CustomProgressBar
 import ru.vaa.vtask.components.CustomTextComponent
 import ru.vaa.vtask.components.CustomTextField
+import ru.vaa.vtask.components.UnderLinedTextComponent
 import ru.vaa.vtask.data.LoaderIntro
 import ru.vaa.vtask.data.login.LogInUIEvent
 import ru.vaa.vtask.data.login.LogInViewModel
@@ -66,9 +68,8 @@ fun LogInScreen(logInViewModel: LogInViewModel = viewModel()) {
                 painterResource = painterResource(id = R.drawable.ic_pass),
                 errorStatus = logInViewModel.logInUIState.value.passwordError
             ) { logInViewModel.onEvent(LogInUIEvent.PasswordChanged(it)) }
-            ClickableTextComponent(value = stringResource(id = R.string.forgot_pass)) {
-                /** Тут должна быть обработка забытого пароля **/
-            }
+            Spacer(modifier = Modifier.height(40.dp))
+            UnderLinedTextComponent(value = stringResource(id = R.string.forgot_pass))
         }
 
         if (logInViewModel.logInInProgress.value) {

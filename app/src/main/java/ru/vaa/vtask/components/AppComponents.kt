@@ -1,13 +1,12 @@
 package ru.vaa.vtask.components
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
@@ -29,18 +28,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.vaa.vtask.R
@@ -142,7 +141,8 @@ fun CustomTextField(
             errorLeadingIconColor = SystemError
         ),
         singleLine = true,
-        keyboardOptions = KeyboardOptions.Default,
+        maxLines = 1,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         value = textValue.value,
         onValueChange = {
             textValue.value = it
@@ -167,6 +167,8 @@ fun CustomPasswordTextField(
     errorStatus: Boolean = false,
     onTextSelected: (String) -> Unit
 ) {
+    val localFocusManager = LocalFocusManager.current
+
     val password = remember {
         mutableStateOf("")
     }
@@ -188,7 +190,14 @@ fun CustomPasswordTextField(
             errorLeadingIconColor = SystemError
         ),
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        maxLines = 1,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions {
+            localFocusManager.clearFocus()
+        },
         value = password.value,
         onValueChange = {
             password.value = it
@@ -219,26 +228,20 @@ fun CustomPasswordTextField(
 }
 
 @Composable
-fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
-    val annotatedString = buildAnnotatedString {
-        withStyle(style = SpanStyle(color = Primary)) {
-            pushStringAnnotation(tag = value, annotation = value)
-            append(value)
-        }
-    }
-    Box(
+fun UnderLinedTextComponent(value: String) {
+    Text(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 15.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        ClickableText(text = annotatedString, onClick = { offset ->
-            annotatedString.getStringAnnotations(offset, offset).firstOrNull()?.also {
-                Log.d("ClickableTextComponent", "{$it}")
-                onTextSelected(it.item)
-            }
-        })
-    }
+            .fillMaxWidth(),
+        text = value,
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            fontStyle = FontStyle.Normal,
+            color = Monochrome60
+        ),
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+    )
 }
 
 @Composable
