@@ -41,7 +41,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.vaa.vtask.R
 import ru.vaa.vtask.ui.theme.Monochrome10
-import ru.vaa.vtask.ui.theme.Monochrome20
 import ru.vaa.vtask.ui.theme.Monochrome60
 import ru.vaa.vtask.ui.theme.Monochrome80
 import ru.vaa.vtask.ui.theme.Primary
@@ -112,7 +111,12 @@ fun CustomHeadingCardTextComponent(value: String) {
 
 @ExperimentalMaterial3Api
 @Composable
-fun CustomTextField(label: String, painterResource: Painter, onTextSelected: (String) -> Unit) {
+fun CustomTextField(
+    label: String,
+    painterResource: Painter,
+    errorStatus: Boolean = false,
+    onTextSelected: (String) -> Unit
+) {
     val textValue = remember {
         mutableStateOf("")
     }
@@ -136,7 +140,8 @@ fun CustomTextField(label: String, painterResource: Painter, onTextSelected: (St
         },
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "")
-        }
+        },
+        isError = !errorStatus
     )
 }
 
@@ -145,6 +150,7 @@ fun CustomTextField(label: String, painterResource: Painter, onTextSelected: (St
 fun CustomPasswordTextField(
     label: String,
     painterResource: Painter,
+    errorStatus: Boolean = false,
     onTextSelected: (String) -> Unit
 ) {
     val password = remember {
@@ -190,7 +196,8 @@ fun CustomPasswordTextField(
             }
         },
         visualTransformation = if (passwordVisible.value) VisualTransformation.None else
-            PasswordVisualTransformation()
+            PasswordVisualTransformation(),
+        isError = !errorStatus
     )
 }
 

@@ -60,19 +60,23 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel = viewModel()) {
             Spacer(modifier = Modifier.height(20.dp))
             CustomTextField(
                 label = stringResource(id = R.string.first_name),
-                painterResource = painterResource(id = R.drawable.ic_profile)
+                painterResource = painterResource(id = R.drawable.ic_profile),
+                errorStatus = signUpViewModel.registrationUIState.value.firstNameError
             ) { signUpViewModel.onEvent(SignUpUIEvent.FirstNameChanged(it)) }
             CustomTextField(
                 label = stringResource(id = R.string.last_name),
-                painterResource = painterResource(id = R.drawable.ic_profile)
+                painterResource = painterResource(id = R.drawable.ic_profile),
+                errorStatus = signUpViewModel.registrationUIState.value.lastNameError
             ) { signUpViewModel.onEvent(SignUpUIEvent.LastNameChanged(it)) }
             CustomTextField(
                 label = stringResource(id = R.string.email),
-                painterResource = painterResource(id = R.drawable.ic_mail)
+                painterResource = painterResource(id = R.drawable.ic_mail),
+                errorStatus = signUpViewModel.registrationUIState.value.emailError
             ) { signUpViewModel.onEvent(SignUpUIEvent.EmailChanged(it)) }
             CustomPasswordTextField(
                 label = stringResource(id = R.string.password),
-                painterResource = painterResource(id = R.drawable.ic_pass)
+                painterResource = painterResource(id = R.drawable.ic_pass),
+                errorStatus = signUpViewModel.registrationUIState.value.passwordError
             ) { signUpViewModel.onEvent(SignUpUIEvent.PasswordChanged(it)) }
         }
         CustomFAB(
