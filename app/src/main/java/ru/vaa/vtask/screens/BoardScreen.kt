@@ -1,4 +1,4 @@
-package ru.vaa.vtask
+package ru.vaa.vtask.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -32,6 +32,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
+import ru.vaa.vtask.R
 import ru.vaa.vtask.components.CustomCardTextComponent
 import ru.vaa.vtask.components.CustomFAB
 import ru.vaa.vtask.components.CustomHeadingCardTextComponent
@@ -40,11 +41,11 @@ import ru.vaa.vtask.components.CustomTextComponent
 import ru.vaa.vtask.data.LoaderIntro
 import ru.vaa.vtask.data.OnBoardingData
 import ru.vaa.vtask.navigation.Screen
-import ru.vaa.vtask.navigation.VTaskRouter
+import ru.vaa.vtask.navigation.PostVTaskRouter
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun StartBoard() {
+fun BoardScreen() {
     val items = ArrayList<OnBoardingData>()
 
     items.add(
@@ -177,7 +178,8 @@ fun SelectSection(pagerState: PagerState) {
             modifier = Modifier
                 .padding(top = 15.dp, bottom = 20.dp)
                 .align(Alignment.BottomCenter)
-                .clip(CircleShape)
+                .clip(CircleShape),
+            isEnabled = true
         ) {
             when (pagerState.currentPage) {
                 0 -> scope.launch {
@@ -186,8 +188,8 @@ fun SelectSection(pagerState: PagerState) {
 
                 1 -> {
                     when (selectedItem.title) {
-                        logInScreen -> VTaskRouter.navigateTo(Screen.LogInScreen)
-                        signUpScreen -> VTaskRouter.navigateTo(Screen.SignUpScreen)
+                        logInScreen -> PostVTaskRouter.navigateTo(Screen.LogInScreen)
+                        signUpScreen -> PostVTaskRouter.navigateTo(Screen.SignUpScreen)
                     }
                 }
             }

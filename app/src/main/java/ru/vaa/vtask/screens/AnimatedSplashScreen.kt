@@ -1,4 +1,4 @@
-package ru.vaa.vtask
+package ru.vaa.vtask.screens
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
@@ -18,8 +18,9 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import ru.vaa.vtask.R
 import ru.vaa.vtask.navigation.Screen
-import ru.vaa.vtask.navigation.VTaskRouter
+import ru.vaa.vtask.navigation.PostVTaskRouter
 import ru.vaa.vtask.ui.theme.Primary
 
 @Composable
@@ -39,7 +40,7 @@ fun AnimatedSplashScreen() {
                 })
         )
         delay(3000L)
-        VTaskRouter.navigateTo(Screen.BoardScreen)
+        PostVTaskRouter.navigateTo(Screen.BoardScreen)
         //navController.navigate(Screen1.StartBoard.route)
     }
     Splash(scale)

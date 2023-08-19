@@ -11,7 +11,7 @@ sealed class Screen {
     object HomeScreen : Screen()
 }
 
-object VTaskRouter {
+object PostVTaskRouter {
     var currentScreen: MutableState<Screen> = mutableStateOf(Screen.SplashScreen)
 
     fun navigateTo(destination: Screen) {

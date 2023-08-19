@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.vaa.vtask.R
 import ru.vaa.vtask.ui.theme.Monochrome10
+import ru.vaa.vtask.ui.theme.Monochrome30
 import ru.vaa.vtask.ui.theme.Monochrome60
 import ru.vaa.vtask.ui.theme.Monochrome80
 import ru.vaa.vtask.ui.theme.Primary
@@ -227,11 +228,11 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 }
 
 @Composable
-fun CustomFAB(modifier: Modifier, onClick: () -> Unit) {
+fun CustomFAB(modifier: Modifier, isEnabled: Boolean = false, onClick: () -> Unit) {
     FloatingActionButton(
         modifier = modifier,
-        onClick = { onClick() },
-        containerColor = Primary
+        onClick = { if (isEnabled) onClick() },
+        containerColor = if (isEnabled) Primary else Monochrome30
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_next),

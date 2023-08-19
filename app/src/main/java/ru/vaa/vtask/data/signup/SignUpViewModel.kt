@@ -3,79 +3,104 @@ package ru.vaa.vtask.data.signup
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import ru.vaa.vtask.data.RegistrationUIState
+import com.google.firebase.auth.FirebaseAuth
 import ru.vaa.vtask.data.rules.Validator
+import ru.vaa.vtask.navigation.Screen
+import ru.vaa.vtask.navigation.PostVTaskRouter
 
 class SignUpViewModel : ViewModel() {
 
     private val TAG = SignUpViewModel::class.simpleName
-    var registrationUIState = mutableStateOf(RegistrationUIState())
+    var signUpUIState = mutableStateOf(SignUpUIState())
+    var allValidationsPassed = mutableStateOf(false)
+    var signUpInProgress = mutableStateOf(false)
 
     fun onEvent(event: SignUpUIEvent) {
-        validateDataWithRules()
         when (event) {
             is SignUpUIEvent.FirstNameChanged -> {
-                registrationUIState.value = registrationUIState.value.copy(
+                signUpUIState.value = signUpUIState.value.copy(
                     firstName = event.firstName
                 )
-                printState()
             }
 
             is SignUpUIEvent.LastNameChanged -> {
-                registrationUIState.value = registrationUIState.value.copy(
+                signUpUIState.value = signUpUIState.value.copy(
                     lastName = event.lastName
                 )
-                printState()
             }
 
             is SignUpUIEvent.EmailChanged -> {
-                registrationUIState.value = registrationUIState.value.copy(
+                signUpUIState.value = signUpUIState.value.copy(
                     email = event.email
                 )
-                printState()
             }
 
             is SignUpUIEvent.PasswordChanged -> {
-                registrationUIState.value = registrationUIState.value.copy(
+                signUpUIState.value = signUpUIState.value.copy(
                     password = event.password
                 )
-                printState()
             }
 
             is SignUpUIEvent.RegisterButtonClicked -> {
                 signUp()
             }
         }
+        validateDataWithRules()
     }
 
     private fun signUp() {
         Log.d(TAG, "Inside_printState")
-        printState()
-
-        validateDataWithRules()
+        createUserInFirebase(
+            email = signUpUIState.value.email,
+            password = signUpUIState.value.password
+        )
     }
 
     private fun validateDataWithRules() {
-        val firstNameResult = Validator.validateFirstName(registrationUIState.value.firstName)
-        val lastNameResult = Validator.validateLastName(registrationUIState.value.lastName)
-        val emailResult = Validator.validateEmail(registrationUIState.value.email)
-        val passwordResult = Validator.validatePassword(registrationUIState.value.password)
+        val firstNameResult = Validator.validateFirstName(signUpUIState.value.firstName)
+        val lastNameResult = Validator.validateLastName(signUpUIState.value.lastName)
+        val emailResult = Validator.validateEmail(signUpUIState.value.email)
+        val passwordResult = Validator.validatePassword(signUpUIState.value.password)
         Log.d(TAG, "Inside_validateDataWithRules")
         Log.d(TAG, "firstNameResult: $firstNameResult")
         Log.d(TAG, "lastNameResult: $lastNameResult")
         Log.d(TAG, "emailResult: $emailResult")
         Log.d(TAG, "passwordResult: $passwordResult")
 
-        registrationUIState.value = registrationUIState.value.copy(
+        signUpUIState.value = signUpUIState.value.copy(
             firstNameError = firstNameResult.status,
             lastNameError = lastNameResult.status,
             emailError = emailResult.status,
             passwordError = passwordResult.status
         )
+
+        allValidationsPassed.value = firstNameResult.status &&
+                lastNameResult.status &&
+                emailResult.status &&
+                passwordResult.status
     }
 
-    private fun printState() {
-        Log.d(TAG, "Inside_printState")
-        Log.d(TAG, registrationUIState.value.toString())
+    private fun createUserInFirebase(email: String, password: String) {
+
+        signUpInProgress.value = true
+
+        FirebaseAuth.getInstance()
+            .createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                Log.d(TAG, "Inside_OnCompleteListener")
+                Log.d(TAG, "isSuccessful = ${it.isSuccessful}")
+
+                signUpInProgress.value = false
+                if (it.isSuccessful) {
+                    PostVTaskRouter.navigateTo(Screen.HomeScreen)
+                }
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "Inside_OnFailureListener")
+                Log.d(TAG, "Exception = ${it.message}")
+                Log.d(TAG, "Exception = ${it.localizedMessage}")
+
+                signUpInProgress.value = false
+            }
     }
 }

@@ -1,11 +1,10 @@
-package ru.vaa.vtask.data
+package ru.vaa.vtask.data.signup
 
-data class RegistrationUIState (
+data class SignUpUIState(
     var firstName: String = "",
     var lastName: String = "",
     var email: String = "",
     var password: String = "",
-
 
     var firstNameError: Boolean = false,
     var lastNameError: Boolean = false,

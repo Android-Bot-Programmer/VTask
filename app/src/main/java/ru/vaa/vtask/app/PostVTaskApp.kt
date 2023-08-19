@@ -5,22 +5,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import ru.vaa.vtask.AnimatedSplashScreen
-import ru.vaa.vtask.StartBoard
+import ru.vaa.vtask.screens.AnimatedSplashScreen
+import ru.vaa.vtask.navigation.PostVTaskRouter
 import ru.vaa.vtask.navigation.Screen
-import ru.vaa.vtask.navigation.VTaskRouter
+import ru.vaa.vtask.screens.BoardScreen
+import ru.vaa.vtask.screens.HomeScreen
 import ru.vaa.vtask.screens.LogInScreen
 import ru.vaa.vtask.screens.SignUpScreen
 import ru.vaa.vtask.ui.theme.Monochrome10
 
 @Composable
-fun VTaskApp() {
+fun PostVTaskApp() {
     Surface(
         modifier = Modifier
             .fillMaxSize(),
         color = Monochrome10
     ) {
-        Crossfade(targetState = VTaskRouter.currentScreen, label = "") { currentState ->
+        Crossfade(targetState = PostVTaskRouter.currentScreen, label = "") { currentState ->
             when (currentState.value) {
                 is Screen.SplashScreen -> {
                     AnimatedSplashScreen()
@@ -35,10 +36,12 @@ fun VTaskApp() {
                 }
 
                 is Screen.BoardScreen -> {
-                    StartBoard()
+                    BoardScreen()
                 }
 
-                else -> {}
+                is Screen.HomeScreen -> {
+                    HomeScreen()
+                }
             }
         }
     }
