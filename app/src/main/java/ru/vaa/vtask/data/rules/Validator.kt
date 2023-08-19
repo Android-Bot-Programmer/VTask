@@ -14,8 +14,9 @@ object Validator {
     }
 
     fun validateEmail(email: String): ValidationResult {
+        val emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
         return ValidationResult(
-            email.isNotEmpty()
+            email.matches(emailRegex)
         )
     }
 

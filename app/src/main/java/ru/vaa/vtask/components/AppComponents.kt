@@ -132,6 +132,7 @@ fun CustomTextField(
             cursorColor = Primary,
             containerColor = Monochrome10
         ),
+        singleLine = true,
         keyboardOptions = KeyboardOptions.Default,
         value = textValue.value,
         onValueChange = {
@@ -171,6 +172,7 @@ fun CustomPasswordTextField(
             cursorColor = Primary,
             containerColor = Monochrome10
         ),
+        singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         value = password.value,
         onValueChange = {
