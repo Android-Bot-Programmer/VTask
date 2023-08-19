@@ -12,7 +12,7 @@ class SignUpViewModel : ViewModel() {
     var registrationUIState = mutableStateOf(RegistrationUIState())
 
     fun onEvent(event: SignUpUIEvent) {
-        //validateDataWithRules()
+        validateDataWithRules()
         when (event) {
             is SignUpUIEvent.FirstNameChanged -> {
                 registrationUIState.value = registrationUIState.value.copy(
