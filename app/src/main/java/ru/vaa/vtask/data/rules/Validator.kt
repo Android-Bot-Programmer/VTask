@@ -21,10 +21,9 @@ object Validator {
     }
 
     fun validatePassword(pass: String): ValidationResult {
-        val passwordRegex =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\\\S+\$).{4,}\$".toRegex()
+        val passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}\$".toRegex()
         return ValidationResult(
-            pass.isNotEmpty() && pass.length >= 4 && pass.matches(passwordRegex)
+            pass.matches(passwordRegex)
         )
     }
 }

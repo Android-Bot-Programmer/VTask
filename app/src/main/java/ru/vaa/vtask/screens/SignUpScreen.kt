@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,14 +25,15 @@ import ru.vaa.vtask.R
 import ru.vaa.vtask.components.CustomFAB
 import ru.vaa.vtask.components.CustomHeadingTextComponent
 import ru.vaa.vtask.components.CustomPasswordTextField
+import ru.vaa.vtask.components.CustomProgressBar
 import ru.vaa.vtask.components.CustomTextComponent
 import ru.vaa.vtask.components.CustomTextField
 import ru.vaa.vtask.data.LoaderIntro
-import ru.vaa.vtask.data.signup.SignUpViewModel
 import ru.vaa.vtask.data.signup.SignUpUIEvent
+import ru.vaa.vtask.data.signup.SignUpViewModel
+import ru.vaa.vtask.navigation.PostVTaskRouter
 import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.navigation.SystemBackButtonHandler
-import ru.vaa.vtask.navigation.PostVTaskRouter
 
 @Preview(showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,7 +83,7 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel = viewModel()) {
         }
 
         if (signUpViewModel.signUpInProgress.value) {
-            CircularProgressIndicator()
+            CustomProgressBar()
         }
 
         CustomFAB(

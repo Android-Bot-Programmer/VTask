@@ -1,9 +1,11 @@
 package ru.vaa.vtask.components
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
@@ -11,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -42,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.vaa.vtask.R
 import ru.vaa.vtask.ui.theme.Monochrome10
+import ru.vaa.vtask.ui.theme.Monochrome20
 import ru.vaa.vtask.ui.theme.Monochrome30
 import ru.vaa.vtask.ui.theme.Monochrome60
 import ru.vaa.vtask.ui.theme.Monochrome80
@@ -249,5 +253,18 @@ fun CustomFAB(modifier: Modifier, isEnabled: Boolean = false, onClick: () -> Uni
             contentDescription = stringResource(R.string.next),
             tint = Color.White
         )
+    }
+}
+
+@Composable
+fun CustomProgressBar() {
+    Box(
+        modifier = Modifier
+            .size(100.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(Monochrome20),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(color = Primary)
     }
 }

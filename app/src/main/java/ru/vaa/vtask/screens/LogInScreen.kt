@@ -8,16 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.vaa.vtask.R
@@ -25,16 +22,17 @@ import ru.vaa.vtask.components.ClickableTextComponent
 import ru.vaa.vtask.components.CustomFAB
 import ru.vaa.vtask.components.CustomHeadingTextComponent
 import ru.vaa.vtask.components.CustomPasswordTextField
+import ru.vaa.vtask.components.CustomProgressBar
 import ru.vaa.vtask.components.CustomTextComponent
 import ru.vaa.vtask.components.CustomTextField
 import ru.vaa.vtask.data.LoaderIntro
 import ru.vaa.vtask.data.login.LogInUIEvent
 import ru.vaa.vtask.data.login.LogInViewModel
+import ru.vaa.vtask.navigation.PostVTaskRouter
 import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.navigation.SystemBackButtonHandler
-import ru.vaa.vtask.navigation.PostVTaskRouter
+import ru.vaa.vtask.ui.theme.Monochrome10
 
-@Preview(showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LogInScreen(logInViewModel: LogInViewModel = viewModel()) {
@@ -42,7 +40,7 @@ fun LogInScreen(logInViewModel: LogInViewModel = viewModel()) {
         modifier = Modifier
             .fillMaxSize()
             .padding(15.dp)
-            .background(Color.White),
+            .background(Monochrome10),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -74,7 +72,7 @@ fun LogInScreen(logInViewModel: LogInViewModel = viewModel()) {
         }
 
         if (logInViewModel.logInInProgress.value) {
-            CircularProgressIndicator()
+            CustomProgressBar()
         }
 
         CustomFAB(
