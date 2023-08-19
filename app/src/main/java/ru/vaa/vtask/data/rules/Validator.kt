@@ -3,13 +3,13 @@ package ru.vaa.vtask.data.rules
 object Validator {
     fun validateFirstName(firstName: String): ValidationResult {
         return ValidationResult(
-            firstName.isNotEmpty() && firstName.length >= 6
+            firstName.isNotEmpty() && firstName.length >= 2
         )
     }
 
     fun validateLastName(lastName: String): ValidationResult {
         return ValidationResult(
-            lastName.isNotEmpty() && lastName.length >= 4
+            lastName.isNotEmpty() && lastName.length >= 2
         )
     }
 
@@ -21,8 +21,10 @@ object Validator {
     }
 
     fun validatePassword(pass: String): ValidationResult {
+        val passwordRegex =
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\\\S+\$).{4,}\$".toRegex()
         return ValidationResult(
-            pass.isNotEmpty() && pass.length >= 4
+            pass.isNotEmpty() && pass.length >= 4 && pass.matches(passwordRegex)
         )
     }
 }

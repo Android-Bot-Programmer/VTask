@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,6 +46,7 @@ import ru.vaa.vtask.ui.theme.Monochrome30
 import ru.vaa.vtask.ui.theme.Monochrome60
 import ru.vaa.vtask.ui.theme.Monochrome80
 import ru.vaa.vtask.ui.theme.Primary
+import ru.vaa.vtask.ui.theme.SystemError
 
 
 @Composable
@@ -131,7 +133,9 @@ fun CustomTextField(
             focusedBorderColor = Primary,
             focusedLabelColor = Primary,
             cursorColor = Primary,
-            containerColor = Monochrome10
+            containerColor = Monochrome10,
+            errorBorderColor = SystemError,
+            errorLeadingIconColor = SystemError
         ),
         singleLine = true,
         keyboardOptions = KeyboardOptions.Default,
@@ -143,7 +147,11 @@ fun CustomTextField(
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "")
         },
-        isError = !errorStatus
+        isError = if (textValue.value.isNotEmpty()) !errorStatus else errorStatus,
+        trailingIcon = {
+            if (!errorStatus && textValue.value.isNotEmpty())
+                Icon(Icons.Filled.Error, "")
+        }
     )
 }
 
@@ -171,7 +179,9 @@ fun CustomPasswordTextField(
             focusedBorderColor = Primary,
             focusedLabelColor = Primary,
             cursorColor = Primary,
-            containerColor = Monochrome10
+            containerColor = Monochrome10,
+            errorBorderColor = SystemError,
+            errorLeadingIconColor = SystemError
         ),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -200,7 +210,7 @@ fun CustomPasswordTextField(
         },
         visualTransformation = if (passwordVisible.value) VisualTransformation.None else
             PasswordVisualTransformation(),
-        isError = !errorStatus
+        isError = if (password.value.isNotEmpty()) !errorStatus else errorStatus
     )
 }
 
