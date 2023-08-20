@@ -3,6 +3,7 @@ package ru.vaa.vtask.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalFocusManager
@@ -40,16 +42,20 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.vaa.vtask.R
 import ru.vaa.vtask.ui.theme.Monochrome10
 import ru.vaa.vtask.ui.theme.Monochrome20
 import ru.vaa.vtask.ui.theme.Monochrome30
+import ru.vaa.vtask.ui.theme.Monochrome50
 import ru.vaa.vtask.ui.theme.Monochrome60
 import ru.vaa.vtask.ui.theme.Monochrome80
+import ru.vaa.vtask.ui.theme.Monochrome90
 import ru.vaa.vtask.ui.theme.Primary
 import ru.vaa.vtask.ui.theme.SystemError
+import java.util.Date
 
 
 @Composable
@@ -270,4 +276,37 @@ fun CustomProgressBar() {
     ) {
         CircularProgressIndicator(color = Primary)
     }
+}
+
+@Composable
+fun CustomTextWithDate(day: Date) {
+    Text(
+        text = "${DateUtils.getMonthName(day)} " +
+                "${DateUtils.getDayNumber(day)}, " +
+                DateUtils.getYear(day),
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Monochrome90
+        ),
+        modifier = Modifier
+            .padding(bottom = 10.dp)
+    )
+}
+
+@Composable
+fun BottomShadow(alpha: Float = 0.1f, height: Dp = 8.dp) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Monochrome50.copy(alpha = alpha),
+                        Color.Transparent,
+                    )
+                )
+            )
+    )
 }
