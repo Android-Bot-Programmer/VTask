@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,8 +41,10 @@ import ru.vaa.vtask.components.CustomHeadingTextComponent
 import ru.vaa.vtask.components.CustomTextComponent
 import ru.vaa.vtask.data.LoaderIntro
 import ru.vaa.vtask.data.OnBoardingData
-import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.navigation.PostVTaskRouter
+import ru.vaa.vtask.navigation.Screen
+import ru.vaa.vtask.ui.theme.Monochrome50
+import ru.vaa.vtask.ui.theme.Primary
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -161,8 +164,13 @@ fun SelectSection(pagerState: PagerState) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             RadioButton(
+                                modifier = Modifier,
                                 selected = selectedItem == label,
-                                onClick = { selectedItem = label }
+                                onClick = { selectedItem = label },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = Primary,
+                                    unselectedColor = Monochrome50
+                                )
                             )
                             Column {
                                 CustomHeadingCardTextComponent(label.title)
