@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,18 +19,24 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import ru.vaa.vtask.R
 import ru.vaa.vtask.data.home.HomeViewModel
-import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.navigation.PostVTaskRouter
+import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.ui.theme.Primary
+import ru.vaa.vtask.ui.theme.SystemBackground
 
 @Composable
 fun AnimatedSplashScreen(homeViewModel: HomeViewModel = viewModel()) {
     homeViewModel.checkForActiveSession()
     val scale = remember {
         Animatable(0f)
+    }
+    val systemUiController = rememberSystemUiController()
+    SideEffect {
+        systemUiController.setStatusBarColor(Primary)
     }
 
     // AnimationEffect
@@ -43,7 +50,7 @@ fun AnimatedSplashScreen(homeViewModel: HomeViewModel = viewModel()) {
                 })
         )
         delay(3000L)
-
+        systemUiController.setStatusBarColor(SystemBackground)
         if (homeViewModel.isUserLoggedIn.value == true) {
             PostVTaskRouter.navigateTo(Screen.HomeScreen)
         } else {
