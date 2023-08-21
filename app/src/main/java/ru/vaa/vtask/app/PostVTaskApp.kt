@@ -11,6 +11,8 @@ import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.screens.BoardScreen
 import ru.vaa.vtask.screens.HomeScreen
 import ru.vaa.vtask.screens.LogInScreen
+import ru.vaa.vtask.screens.MainScreen
+import ru.vaa.vtask.screens.SettingsScreen
 import ru.vaa.vtask.screens.SignUpScreen
 import ru.vaa.vtask.ui.theme.Monochrome10
 
@@ -41,6 +43,14 @@ fun PostVTaskApp() {
 
                 is Screen.HomeScreen -> {
                     HomeScreen()
+                }
+
+                is Screen.SettingsScreen -> {
+                    SettingsScreen()
+                }
+
+                is Screen.MainScreen -> {
+                    MainScreen()
                 }
             }
         }

@@ -3,12 +3,16 @@ package ru.vaa.vtask.navigation
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 
-sealed class Screen {
+sealed class Screen(
+    val route: String = ""
+) {
     object SplashScreen : Screen()
     object BoardScreen : Screen()
     object LogInScreen : Screen()
     object SignUpScreen : Screen()
-    object HomeScreen : Screen()
+    object MainScreen : Screen(route = "mainScreen")
+    object HomeScreen : Screen(route = "homeScreen")
+    object SettingsScreen : Screen(route = "settingsScreen")
 }
 
 object PostVTaskRouter {

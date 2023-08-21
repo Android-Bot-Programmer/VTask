@@ -70,11 +70,17 @@ dependencies {
     implementation 'androidx.compose.material:material-icons-extended:1.5.0'
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.30.1"
 
-    //on board
+    //OnBoard
     implementation 'com.airbnb.android:lottie-compose:5.2.0'
     implementation 'com.google.accompanist:accompanist-pager:0.19.0'
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:32.2.2')
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+    //Navigation
+    implementation 'androidx.navigation:navigation-compose:2.7.0'
+
+    //Material2 for FAB on Home Screen
+    implementation 'androidx.compose.material:material:1.5.0'
 }

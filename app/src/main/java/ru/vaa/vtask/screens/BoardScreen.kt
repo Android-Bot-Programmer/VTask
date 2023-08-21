@@ -34,11 +34,11 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import ru.vaa.vtask.R
-import ru.vaa.vtask.components.CustomCardTextComponent
-import ru.vaa.vtask.components.CustomFAB
-import ru.vaa.vtask.components.CustomHeadingCardTextComponent
-import ru.vaa.vtask.components.CustomHeadingTextComponent
-import ru.vaa.vtask.components.CustomTextComponent
+import ru.vaa.vtask.components.NormalCardTextComponent
+import ru.vaa.vtask.components.CustomFABNext
+import ru.vaa.vtask.components.HeadingCardTextComponent
+import ru.vaa.vtask.components.HeadingTextComponent
+import ru.vaa.vtask.components.NormalTextComponent
 import ru.vaa.vtask.data.LoaderIntro
 import ru.vaa.vtask.data.OnBoardingData
 import ru.vaa.vtask.navigation.PostVTaskRouter
@@ -106,8 +106,8 @@ fun OnBoardingPager(
                             image = it
                         )
                     }
-                    CustomHeadingTextComponent(value = item[page].title)
-                    CustomTextComponent(value = item[page].desc)
+                    HeadingTextComponent(value = item[page].title)
+                    NormalTextComponent(value = item[page].desc)
                     SelectSection(pagerState)
                 }
             }
@@ -173,8 +173,8 @@ fun SelectSection(pagerState: PagerState) {
                                 )
                             )
                             Column {
-                                CustomHeadingCardTextComponent(label.title)
-                                CustomCardTextComponent(label.desc)
+                                HeadingCardTextComponent(label.title)
+                                NormalCardTextComponent(label.desc)
                             }
                         }
                     }
@@ -182,7 +182,7 @@ fun SelectSection(pagerState: PagerState) {
             }
 
         }
-        CustomFAB(
+        CustomFABNext(
             modifier = Modifier
                 .padding(top = 15.dp, bottom = 20.dp)
                 .align(Alignment.BottomCenter)

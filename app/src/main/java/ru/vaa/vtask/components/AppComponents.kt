@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -30,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -59,7 +62,7 @@ import java.util.Date
 
 
 @Composable
-fun CustomTextComponent(value: String) {
+fun NormalTextComponent(value: String) {
     Text(
         modifier = Modifier
             .fillMaxWidth(),
@@ -75,7 +78,7 @@ fun CustomTextComponent(value: String) {
 }
 
 @Composable
-fun CustomCardTextComponent(value: String) {
+fun NormalCardTextComponent(value: String) {
     Text(
         modifier = Modifier
             .fillMaxWidth()
@@ -91,7 +94,7 @@ fun CustomCardTextComponent(value: String) {
 }
 
 @Composable
-fun CustomHeadingTextComponent(value: String) {
+fun HeadingTextComponent(value: String) {
     Text(
         modifier = Modifier
             .fillMaxWidth(),
@@ -107,7 +110,7 @@ fun CustomHeadingTextComponent(value: String) {
 }
 
 @Composable
-fun CustomHeadingCardTextComponent(value: String) {
+fun HeadingCardTextComponent(value: String) {
     Text(
         modifier = Modifier
             .padding(top = 3.dp),
@@ -251,7 +254,7 @@ fun UnderLinedTextComponent(value: String) {
 }
 
 @Composable
-fun CustomFAB(modifier: Modifier, isEnabled: Boolean = false, onClick: () -> Unit) {
+fun CustomFABNext(modifier: Modifier, isEnabled: Boolean = false, onClick: () -> Unit) {
     FloatingActionButton(
         modifier = modifier,
         onClick = { if (isEnabled) onClick() },
@@ -260,7 +263,26 @@ fun CustomFAB(modifier: Modifier, isEnabled: Boolean = false, onClick: () -> Uni
         Icon(
             painter = painterResource(id = R.drawable.ic_next),
             contentDescription = stringResource(R.string.next),
-            tint = Color.White
+            tint = Monochrome10
+        )
+    }
+}
+
+@Composable
+fun CustomFABHome(imageVector: ImageVector, onClick: () -> Unit) {
+    FloatingActionButton(
+        modifier = Modifier
+            .size(70.dp)
+            .clip(CircleShape),
+        onClick = { onClick() },
+        containerColor = Primary,
+        elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = null,
+            tint = Color.White,
+            modifier = Modifier.size(30.dp)
         )
     }
 }

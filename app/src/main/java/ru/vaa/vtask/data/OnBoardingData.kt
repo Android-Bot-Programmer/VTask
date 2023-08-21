@@ -18,11 +18,9 @@ data class OnBoardingData(
 @Composable
 fun LoaderIntro(modifier: Modifier, image: Int) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(image))
-    //val progress by animateLottieCompositionAsState(composition = composition)
     LottieAnimation(
         composition = composition,
         iterations = LottieConstants.IterateForever,
         modifier = modifier
-        //progress = { progress }
     )
 }

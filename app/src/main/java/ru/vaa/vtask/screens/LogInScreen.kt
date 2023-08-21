@@ -20,11 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.vaa.vtask.R
-import ru.vaa.vtask.components.CustomFAB
-import ru.vaa.vtask.components.CustomHeadingTextComponent
+import ru.vaa.vtask.components.CustomFABNext
+import ru.vaa.vtask.components.HeadingTextComponent
 import ru.vaa.vtask.components.CustomPasswordTextField
 import ru.vaa.vtask.components.CustomProgressBar
-import ru.vaa.vtask.components.CustomTextComponent
+import ru.vaa.vtask.components.NormalTextComponent
 import ru.vaa.vtask.components.CustomTextField
 import ru.vaa.vtask.components.UnderLinedTextComponent
 import ru.vaa.vtask.data.LoaderIntro
@@ -56,8 +56,8 @@ fun LogInScreen(logInViewModel: LogInViewModel = viewModel()) {
                     .align(alignment = Alignment.CenterHorizontally),
                 image = R.raw.animation_welcome
             )
-            CustomTextComponent(value = stringResource(id = R.string.hello))
-            CustomHeadingTextComponent(value = stringResource(id = R.string.welcome_back))
+            NormalTextComponent(value = stringResource(id = R.string.hello))
+            HeadingTextComponent(value = stringResource(id = R.string.welcome_back))
             CustomTextField(
                 label = stringResource(id = R.string.email),
                 painterResource = painterResource(id = R.drawable.ic_mail),
@@ -76,7 +76,7 @@ fun LogInScreen(logInViewModel: LogInViewModel = viewModel()) {
             CustomProgressBar()
         }
 
-        CustomFAB(
+        CustomFABNext(
             modifier = Modifier
                 .padding(top = 15.dp, bottom = 20.dp)
                 .align(Alignment.BottomCenter)

@@ -92,7 +92,7 @@ class SignUpViewModel : ViewModel() {
 
                 signUpInProgress.value = false
                 if (it.isSuccessful) {
-                    PostVTaskRouter.navigateTo(Screen.HomeScreen)
+                    PostVTaskRouter.navigateTo(Screen.MainScreen)
                 }
             }
             .addOnFailureListener {
@@ -102,22 +102,5 @@ class SignUpViewModel : ViewModel() {
 
                 signUpInProgress.value = false
             }
-    }
-
-    fun logout() {
-        val firebaseAuth = FirebaseAuth.getInstance()
-
-        firebaseAuth.signOut()
-
-        val authStateListener = FirebaseAuth.AuthStateListener {
-            if (it.currentUser == null) {
-                Log.d(TAG, "Inside sign outsuccess")
-                PostVTaskRouter.navigateTo(Screen.LogInScreen)
-            } else {
-                Log.d(TAG, "Inside sign out is not complete")
-            }
-        }
-
-        firebaseAuth.addAuthStateListener(authStateListener)
     }
 }

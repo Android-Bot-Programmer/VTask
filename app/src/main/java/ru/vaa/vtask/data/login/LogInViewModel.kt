@@ -62,7 +62,7 @@ class LogInViewModel : ViewModel() {
 
                 if (it.isSuccessful) {
                     logInInProgress.value = false
-                    PostVTaskRouter.navigateTo(Screen.HomeScreen)
+                    PostVTaskRouter.navigateTo(Screen.MainScreen)
                 }
             }
             .addOnFailureListener {

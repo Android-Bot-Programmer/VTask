@@ -22,11 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.vaa.vtask.R
-import ru.vaa.vtask.components.CustomFAB
-import ru.vaa.vtask.components.CustomHeadingTextComponent
+import ru.vaa.vtask.components.CustomFABNext
+import ru.vaa.vtask.components.HeadingTextComponent
 import ru.vaa.vtask.components.CustomPasswordTextField
 import ru.vaa.vtask.components.CustomProgressBar
-import ru.vaa.vtask.components.CustomTextComponent
+import ru.vaa.vtask.components.NormalTextComponent
 import ru.vaa.vtask.components.CustomTextField
 import ru.vaa.vtask.data.LoaderIntro
 import ru.vaa.vtask.data.signup.SignUpUIEvent
@@ -57,8 +57,8 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel = viewModel()) {
                     .align(alignment = Alignment.CenterHorizontally),
                 image = R.raw.animation_registration
             )
-            CustomTextComponent(value = stringResource(id = R.string.hello))
-            CustomHeadingTextComponent(value = stringResource(id = R.string.create_a_new_account))
+            NormalTextComponent(value = stringResource(id = R.string.hello))
+            HeadingTextComponent(value = stringResource(id = R.string.create_a_new_account))
             Spacer(modifier = Modifier.height(20.dp))
             CustomTextField(
                 label = stringResource(id = R.string.first_name),
@@ -86,7 +86,7 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel = viewModel()) {
             CustomProgressBar()
         }
 
-        CustomFAB(
+        CustomFABNext(
             modifier = Modifier
                 .padding(top = 15.dp, bottom = 20.dp)
                 .align(Alignment.BottomCenter)

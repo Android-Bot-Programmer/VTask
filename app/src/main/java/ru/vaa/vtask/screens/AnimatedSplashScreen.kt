@@ -52,7 +52,7 @@ fun AnimatedSplashScreen(homeViewModel: HomeViewModel = viewModel()) {
         delay(3000L)
         systemUiController.setStatusBarColor(SystemBackground)
         if (homeViewModel.isUserLoggedIn.value == true) {
-            PostVTaskRouter.navigateTo(Screen.HomeScreen)
+            PostVTaskRouter.navigateTo(Screen.MainScreen)
         } else {
             PostVTaskRouter.navigateTo(Screen.BoardScreen)
         }
