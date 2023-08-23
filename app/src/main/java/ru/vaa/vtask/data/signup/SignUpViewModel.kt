@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import ru.vaa.vtask.data.rules.Validator
 import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.navigation.PostVTaskRouter
@@ -11,6 +12,7 @@ import ru.vaa.vtask.navigation.PostVTaskRouter
 class SignUpViewModel : ViewModel() {
 
     private val TAG = SignUpViewModel::class.simpleName
+    private val auth = FirebaseAuth.getInstance()
     var signUpUIState = mutableStateOf(SignUpUIState())
     var allValidationsPassed = mutableStateOf(false)
     var signUpInProgress = mutableStateOf(false)
@@ -84,15 +86,20 @@ class SignUpViewModel : ViewModel() {
 
         signUpInProgress.value = true
 
-        FirebaseAuth.getInstance()
-            .createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 Log.d(TAG, "Inside_OnCompleteListener")
                 Log.d(TAG, "isSuccessful = ${it.isSuccessful}")
-
-                signUpInProgress.value = false
                 if (it.isSuccessful) {
-                    PostVTaskRouter.navigateTo(Screen.MainScreen)
+                    auth.currentUser?.uid?.let { uid ->
+                        saveData(
+                            uid = uid,
+                            user = Profile(
+                                firstName = signUpUIState.value.firstName,
+                                lastName = signUpUIState.value.lastName
+                            )
+                        )
+                    }
                 }
             }
             .addOnFailureListener {
@@ -101,6 +108,18 @@ class SignUpViewModel : ViewModel() {
                 Log.d(TAG, "Exception = ${it.localizedMessage}")
 
                 signUpInProgress.value = false
+            }
+    }
+
+    private fun saveData(uid: String, user: Profile) {
+        FirebaseDatabase.getInstance().getReference("Profile")
+            .child(uid)
+            .setValue(user)
+            .addOnCompleteListener {
+                signUpInProgress.value = false
+                if (it.isSuccessful) {
+                    PostVTaskRouter.navigateTo(Screen.MainScreen)
+                }
             }
     }
 }

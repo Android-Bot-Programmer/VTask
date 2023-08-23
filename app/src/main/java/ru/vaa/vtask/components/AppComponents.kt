@@ -1,7 +1,12 @@
 package ru.vaa.vtask.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -54,11 +60,10 @@ import ru.vaa.vtask.ui.theme.Monochrome20
 import ru.vaa.vtask.ui.theme.Monochrome30
 import ru.vaa.vtask.ui.theme.Monochrome50
 import ru.vaa.vtask.ui.theme.Monochrome60
+import ru.vaa.vtask.ui.theme.Monochrome70
 import ru.vaa.vtask.ui.theme.Monochrome80
-import ru.vaa.vtask.ui.theme.Monochrome90
 import ru.vaa.vtask.ui.theme.Primary
 import ru.vaa.vtask.ui.theme.SystemError
-import java.util.Date
 
 
 @Composable
@@ -301,22 +306,6 @@ fun CustomProgressBar() {
 }
 
 @Composable
-fun CustomTextWithDate(day: Date) {
-    Text(
-        text = "${DateUtils.getMonthName(day)} " +
-                "${DateUtils.getDayNumber(day)}, " +
-                DateUtils.getYear(day),
-        style = TextStyle(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Monochrome90
-        ),
-        modifier = Modifier
-            .padding(bottom = 10.dp)
-    )
-}
-
-@Composable
 fun BottomShadow(alpha: Float = 0.1f, height: Dp = 8.dp) {
     Box(
         modifier = Modifier
@@ -331,4 +320,50 @@ fun BottomShadow(alpha: Float = 0.1f, height: Dp = 8.dp) {
                 )
             )
     )
+}
+
+@Composable
+fun SettingsItems(title: String, isSpacer: Boolean = true, onClick: () -> Unit) {
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onClick()
+            }
+            .background(Monochrome10)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            androidx.compose.material.Text(
+                modifier = Modifier
+                    .padding(top = 3.dp),
+                text = title,
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    fontStyle = FontStyle.Normal,
+                    color = Monochrome70
+                )
+            )
+            androidx.compose.material.Icon(
+                imageVector = Icons.Filled.ChevronRight,
+                contentDescription = null,
+                tint = Monochrome70
+            )
+        }
+        if (isSpacer) {
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 15.dp, end = 15.dp)
+                    .height(2.dp)
+                    .background(Monochrome30)
+            )
+        }
+    }
 }

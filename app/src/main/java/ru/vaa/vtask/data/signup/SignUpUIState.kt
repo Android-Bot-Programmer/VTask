@@ -11,3 +11,9 @@ data class SignUpUIState(
     var emailError: Boolean = false,
     var passwordError: Boolean = false,
 )
+
+data class Profile(
+    val image: String? = null,
+    val firstName: String? = null,
+    val lastName: String? = null
+)

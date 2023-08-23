@@ -9,13 +9,11 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import ru.vaa.vtask.data.rules.NavigationItem
 import ru.vaa.vtask.ui.theme.Monochrome50
 import ru.vaa.vtask.ui.theme.Monochrome60
@@ -23,7 +21,7 @@ import ru.vaa.vtask.ui.theme.Primary
 import ru.vaa.vtask.ui.theme.SystemBackground
 
 @Composable
-fun BottomNavigation(navController: NavHostController) {
+fun BottomNavigation(navController: NavHostController, currentRoute: String?) {
     val navigationItemList = listOf(
         NavigationItem(
             title = "Home",
@@ -43,9 +41,6 @@ fun BottomNavigation(navController: NavHostController) {
         backgroundColor = SystemBackground,
         elevation = 0.dp
     ) {
-        val backStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = backStackEntry?.destination?.route
-
         navigationItemList.forEach { item ->
             BottomNavigationItem(
                 selected = currentRoute == item.route,
