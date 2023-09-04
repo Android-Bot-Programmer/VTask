@@ -47,7 +47,6 @@ import java.util.Locale
 fun SingleRowCalendar(onSelectedDayChange: (Date) -> Unit) {
     val calendar = Calendar.getInstance(Locale.getDefault())
     var selectedDate by rememberSaveable { mutableStateOf(calendar.time) }
-    calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
     var currentDate by rememberSaveable { mutableStateOf(calendar.time) }
     Column(
         modifier = Modifier
@@ -100,7 +99,7 @@ fun WeekHeader(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "$monthName $dayName, $yearName",
+            text = "$dayName $monthName, $yearName",
             style = TextStyle(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
