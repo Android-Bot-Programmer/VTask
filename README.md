@@ -6,6 +6,8 @@
 # Information Architecture * UX
 ![Architecture](https://github.com/Android-Bot-Programmer/VTask/assets/142438446/080748ea-2c55-4c73-b933-7af7ff8c9839)
 # Start page
-![Start page](https://github.com/Android-Bot-Programmer/VTask/assets/142438446/e1eef907-f2d8-40af-98ee-fa3b5d4a529f)
+![Start page](https://github.com/Android-Bot-Programmer/VTask/assets/142438446/0a106b22-7b61-4afe-8c08-8db46e5c312e)
 # Log In / Sign Up
-![login signup](https://github.com/Android-Bot-Programmer/VTask/assets/142438446/8d183852-caac-4741-89cc-76eb95b6cefa)
+![login signup](https://github.com/Android-Bot-Programmer/VTask/assets/142438446/0ae794be-fccb-4c56-a14c-ff07edaeab95)
+# Settings / Edit Account
+![settings and edit account](https://github.com/Android-Bot-Programmer/VTask/assets/142438446/42f26690-ab86-43c5-a240-20d436c5dbb2)
