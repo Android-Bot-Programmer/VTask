@@ -17,9 +17,14 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.filled.WarningAmber
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -64,6 +69,7 @@ import ru.vaa.vtask.ui.theme.Monochrome70
 import ru.vaa.vtask.ui.theme.Monochrome80
 import ru.vaa.vtask.ui.theme.Primary
 import ru.vaa.vtask.ui.theme.SystemError
+import ru.vaa.vtask.ui.theme.SystemWarning
 
 
 @Composable
@@ -324,7 +330,7 @@ fun BottomShadow(alpha: Float = 0.1f, height: Dp = 8.dp) {
 
 @Composable
 fun SettingsItems(title: String, isSpacer: Boolean = true, onClick: () -> Unit) {
-    Column (
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
@@ -339,7 +345,7 @@ fun SettingsItems(title: String, isSpacer: Boolean = true, onClick: () -> Unit) 
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            androidx.compose.material.Text(
+            Text(
                 modifier = Modifier
                     .padding(top = 3.dp),
                 text = title,
@@ -350,7 +356,7 @@ fun SettingsItems(title: String, isSpacer: Boolean = true, onClick: () -> Unit) 
                     color = Monochrome70
                 )
             )
-            androidx.compose.material.Icon(
+            Icon(
                 imageVector = Icons.Filled.ChevronRight,
                 contentDescription = null,
                 tint = Monochrome70
@@ -365,5 +371,142 @@ fun SettingsItems(title: String, isSpacer: Boolean = true, onClick: () -> Unit) 
                     .background(Monochrome30)
             )
         }
+    }
+}
+
+@Composable
+fun AccountItem(title: String, value: String, editText: String, editClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Monochrome10)
+            .padding(10.dp)
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(top = 3.dp),
+            text = title,
+            style = TextStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontStyle = FontStyle.Normal,
+                color = Monochrome70
+            )
+        )
+        Text(
+            modifier = Modifier
+                .padding(top = 10.dp),
+            text = value,
+            style = TextStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontStyle = FontStyle.Normal,
+                color = Monochrome70
+            )
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            Row(
+                modifier = Modifier
+                    .clickable { editClick() },
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(end = 10.dp),
+                    text = editText,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        fontStyle = FontStyle.Normal,
+                        color = SystemError
+                    )
+                )
+                Icon(
+                    imageVector = Icons.Filled.Edit,
+                    contentDescription = null,
+                    tint = SystemError
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun WarningTextComponent(value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Monochrome10)
+            .padding(10.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = Icons.Filled.WarningAmber,
+            contentDescription = null,
+            tint = SystemWarning
+        )
+        Text(
+            modifier = Modifier
+                .padding(start = 10.dp),
+            text = value,
+            style = TextStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontStyle = FontStyle.Normal,
+                color = SystemWarning
+            )
+        )
+    }
+}
+
+@Composable
+fun ButtonLogoutComponent(textButton: String, onClick: () -> Unit) {
+    Button(
+        modifier = Modifier
+            .fillMaxWidth(),
+        onClick = { onClick() },
+        shape = RoundedCornerShape(10.dp),
+        colors = ButtonDefaults.buttonColors(SystemError)
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Logout,
+            contentDescription = null,
+            tint = Monochrome10
+        )
+        Text(
+            modifier = Modifier
+                .padding(start = 10.dp),
+            text = textButton,
+            color = Monochrome10
+        )
+    }
+}
+
+@Composable
+fun ItemBottomAppBar(title: String, icon: ImageVector, onClick: () -> Unit) {
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        androidx.compose.material.IconButton(onClick = {
+            onClick()
+        }) {
+            androidx.compose.material.Icon(
+                modifier = Modifier.size(30.dp),
+                imageVector = icon,
+                contentDescription = null,
+                tint = Monochrome50
+            )
+        }
+        Text(
+            text = title,
+            style = TextStyle(
+                fontSize = 14.sp
+            )
+        )
     }
 }

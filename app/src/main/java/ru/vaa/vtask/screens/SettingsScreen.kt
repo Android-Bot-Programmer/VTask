@@ -38,6 +38,8 @@ import ru.vaa.vtask.R
 import ru.vaa.vtask.components.BottomShadow
 import ru.vaa.vtask.components.SettingsItems
 import ru.vaa.vtask.data.settings.SettingsViewModel
+import ru.vaa.vtask.navigation.PostVTaskRouter
+import ru.vaa.vtask.navigation.Screen
 import ru.vaa.vtask.ui.theme.Monochrome60
 import ru.vaa.vtask.ui.theme.Monochrome80
 import ru.vaa.vtask.ui.theme.SystemBackground
@@ -45,9 +47,6 @@ import ru.vaa.vtask.ui.theme.SystemBackground
 @Preview(showBackground = true)
 @Composable
 fun SettingsScreen(settingsViewModel: SettingsViewModel = viewModel()) {
-
-    settingsViewModel.getUserData()
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -55,7 +54,7 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = viewModel()) {
             .verticalScroll(rememberScrollState())
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
         ) {
             Row(
                 modifier = Modifier
@@ -92,7 +91,9 @@ fun SettingsScreen(settingsViewModel: SettingsViewModel = viewModel()) {
             IconButton(
                 modifier = Modifier
                     .align(Alignment.TopEnd),
-                onClick = { /*TODO*/ }
+                onClick = {
+                    PostVTaskRouter.navigateTo(Screen.AccountScreen)
+                }
             ) {
                 Icon(
                     imageVector = Icons.Filled.Edit,

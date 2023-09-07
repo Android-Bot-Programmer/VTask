@@ -3,9 +3,6 @@ package ru.vaa.vtask.navigation
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,22 +18,11 @@ import ru.vaa.vtask.ui.theme.Primary
 import ru.vaa.vtask.ui.theme.SystemBackground
 
 @Composable
-fun BottomNavigation(navController: NavHostController, currentRoute: String?) {
-    val navigationItemList = listOf(
-        NavigationItem(
-            title = "Home",
-            icon = Icons.Default.Home,
-            description = "Home Screen",
-            route = "homeScreen"
-        ),
-        NavigationItem(
-            title = "Settings",
-            icon = Icons.Default.Settings,
-            description = "Settings Screen",
-            route = "settingsScreen"
-        )
-    )
-
+fun BottomNavigation(
+    navController: NavHostController,
+    navigationItemList: List<NavigationItem>,
+    currentRoute: String?
+) {
     BottomNavigation(
         backgroundColor = SystemBackground,
         elevation = 0.dp

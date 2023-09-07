@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import ru.vaa.vtask.screens.AnimatedSplashScreen
 import ru.vaa.vtask.navigation.PostVTaskRouter
 import ru.vaa.vtask.navigation.Screen
+import ru.vaa.vtask.screens.AccountScreen
 import ru.vaa.vtask.screens.BoardScreen
 import ru.vaa.vtask.screens.HomeScreen
 import ru.vaa.vtask.screens.LogInScreen
@@ -51,6 +52,10 @@ fun PostVTaskApp() {
 
                 is Screen.MainScreen -> {
                     MainScreen()
+                }
+
+                is Screen.AccountScreen -> {
+                    AccountScreen()
                 }
             }
         }

@@ -10,6 +10,7 @@ sealed class Screen(
     object BoardScreen : Screen()
     object LogInScreen : Screen()
     object SignUpScreen : Screen()
+    object AccountScreen : Screen(route = "accountScreen")
     object MainScreen : Screen(route = "mainScreen")
     object HomeScreen : Screen(route = "homeScreen")
     object SettingsScreen : Screen(route = "settingsScreen")

@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,13 +45,6 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
         }
         BottomShadow(alpha = .2f, height = 15.dp)
         Spacer(modifier = Modifier.height(20.dp))
-        Button(
-            modifier = Modifier
-                .fillMaxWidth(),
-            onClick = {
-                homeViewModel.logout()
-            }) {
-            Text(text = "logout")
-        }
+
     }
 }
